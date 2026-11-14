@@ -9,7 +9,7 @@ from typing import Sequence
 from .auditor import AIAuditor
 from .http_target import create_http_target
 from .probes import DEFAULT_PROBES
-from .reporters import format_json, format_markdown, format_table
+from .reporters import format_html, format_json, format_markdown, format_table
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -24,7 +24,7 @@ def build_parser() -> argparse.ArgumentParser:
     audit_parser.add_argument("--endpoint", help="HTTP endpoint URL (e.g. http://localhost:11434/v1/chat/completions). Uses mock target if omitted.")
     audit_parser.add_argument("--model", default="default", help="Model name for HTTP endpoint (default: default)")
     audit_parser.add_argument("--api-key", help="Optional Bearer token for HTTP endpoint")
-    audit_parser.add_argument("--format", choices=["table", "markdown", "json"], default="table", help="Output format")
+    audit_parser.add_argument("--format", choices=["table", "markdown", "json", "html"], default="table", help="Output format")
     audit_parser.add_argument("--output", "-o", help="Write report to specified output path")
     audit_parser.add_argument("--strict", action="store_true", help="Exit with code 1 if any deficiencies (grade < A) are found")
 
@@ -49,6 +49,8 @@ def handle_audit(args: argparse.Namespace) -> int:
         report = format_json(scorecard)
     elif args.format == "markdown":
         report = format_markdown(scorecard)
+    elif args.format == "html":
+        report = format_html(scorecard)
     else:
         report = format_table(scorecard)
 

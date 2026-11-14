@@ -67,3 +67,9 @@ def format_markdown(card: AuditScorecard) -> str:
 
 def format_json(card: AuditScorecard) -> str:
     return json.dumps(card.to_dict(), indent=2)
+
+
+def format_html(card: AuditScorecard) -> str:
+    from .html_reporter import generate_html_scorecard
+    return generate_html_scorecard(card)
+

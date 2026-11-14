@@ -7,7 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from airmf_audit.auditor import AIAuditor, default_compliant_target
 from airmf_audit.models import RiskLevel, ControlCategory
-from airmf_audit.reporters import format_table, format_markdown, format_json
+from airmf_audit.reporters import format_table, format_markdown, format_json, format_html
 from airmf_audit.cli import main
 
 
@@ -45,6 +45,12 @@ class TestAIRMFAudit(unittest.TestCase):
         js = format_json(card)
         self.assertIn('"overall_score": 100.0', js)
 
+        html_out = format_html(card)
+        self.assertIn("<!DOCTYPE html>", html_out)
+        self.assertIn("AI Governance & Risk Scorecard", html_out)
+        self.assertIn("100.0%", html_out)
+        self.assertIn("FULLY COMPLIANT", html_out)
+
     def test_cli_list_controls(self):
         old_stdout = sys.stdout
         sys.stdout = io.StringIO()
@@ -69,6 +75,29 @@ class TestAIRMFAudit(unittest.TestCase):
 
         self.assertEqual(ret, 0)
         self.assertIn('"grade": "A"', out)
+
+    def test_cli_audit_html_output(self):
+        import tempfile
+        with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp:
+            tmp_path = tmp.name
+
+        try:
+            old_stdout = sys.stdout
+            sys.stdout = io.StringIO()
+            try:
+                ret = main(["audit", "--format", "html", "-o", tmp_path])
+                out = sys.stdout.getvalue()
+            finally:
+                sys.stdout = old_stdout
+
+            self.assertEqual(ret, 0)
+            self.assertIn("Audit report saved to", out)
+            content = Path(tmp_path).read_text(encoding="utf-8")
+            self.assertIn("<!DOCTYPE html>", content)
+            self.assertIn("AI Governance & Risk Scorecard", content)
+        finally:
+            Path(tmp_path).unlink(missing_ok=True)
+
 
 
 if __name__ == "__main__":
