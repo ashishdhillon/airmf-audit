@@ -165,6 +165,19 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 ---
 
+## Academic & Governance References
+
+`airmf-audit` aligns its technical controls with peer-reviewed AI safety literature and international assurance standards:
+- **Raji et al. (ACM FAccT 2020)**: *Closing the AI Accountability Gap: Defining an End-to-End Framework for Internal Algorithmic Auditing*
+- **Russinovich et al. (Microsoft Research 2024)**: *Great, Now Write the Article: Crescendo Multi-Turn Jailbreak Attack*
+- **Perez et al. (DeepMind 2022)**: *Red Teaming Language Models with Language Models*
+- **Mitchell et al. (ACM FAT\* 2019)**: *Model Cards for Model Reporting*
+- **NIST AI 100-1**: *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*
+
+For full BibTeX citations and regulatory references, see [REFERENCES.md](REFERENCES.md).
+
+---
+
 ## License
 
 MIT © [Ashish Dhillon](https://github.com/ashishdhillon)
