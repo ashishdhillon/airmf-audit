@@ -1,7 +1,12 @@
 import http.server
 import json
+import sys
 import threading
 import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from airmf_audit.http_target import create_http_target
 
 

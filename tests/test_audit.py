@@ -1,6 +1,10 @@
 import unittest
 import io
 import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 from airmf_audit.auditor import AIAuditor, default_compliant_target
 from airmf_audit.models import RiskLevel, ControlCategory
 from airmf_audit.reporters import format_table, format_markdown, format_json
