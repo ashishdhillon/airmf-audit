@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airmf-audit"
+version = "0.1.0"
+description = "Automated technical control auditor and governance evaluation harness for LLM systems"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Ashish Dhillon", email = "ashishdhillon.dev@gmail.com" }
+]
+keywords = [
+  "ai-governance",
+  "ai-audit",
+  "compliance",
+  "llm-security",
+  "risk-management",
+  "adversarial-testing"
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security"
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0.0"
+]
+
+[project.scripts]
+airmf-audit = "airmf_audit.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/ashishdhillon/airmf-audit"
+Repository = "https://github.com/ashishdhillon/airmf-audit"
+Issues = "https://github.com/ashishdhillon/airmf-audit/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
